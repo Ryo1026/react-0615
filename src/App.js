@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react' // 使用實體參照hooks
 import Item from './components/Item'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <ul>
-        {[1, 2, 3].map((v, i) => (
+        {['A', 'B', 'C'].map((v, i) => (
           <Item value={v} key={i} />
         ))}
       </ul>
