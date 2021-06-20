@@ -6,7 +6,6 @@ function App() {
     username: '',
     email: '',
     password: '',
-    agree: false,
   })
 
   // 每個欄位的錯誤訊息
@@ -14,23 +13,14 @@ function App() {
     username: '',
     email: '',
     password: '',
-    agree: '',
   })
 
   // 處理每個欄位的變動
   const handleFieldChange = (e) => {
-    // console.log(
-    //   e.target.name,
-    //   e.target.type,
-    //   e.target.value,
-    //   e.target.checked
-    // )
-
     // 更新輸入欄位
     const updatedFields = {
       ...fields,
-      [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+      [e.target.name]: e.target.value,
     }
 
     setFields(updatedFields)
@@ -116,7 +106,9 @@ function App() {
             placeholder="email信箱"
           />
           {fieldErrors.email && (
-            <small className="text-danger form-text">{fieldErrors.email}</small>
+            <small className="text-danger form-text">
+              {fieldErrors.email}
+            </small>
           )}
         </div>
 
@@ -137,24 +129,6 @@ function App() {
             </small>
           )}
         </div>
-        <div className="form-check">
-          <input
-            type="checkbox"
-            name="agree"
-            required
-            checked={fields.agree}
-            onChange={handleFieldChange}
-            className="form-check-input"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            我同意網站的使用者規章
-          </label>
-        </div>
-
-        {fieldErrors.agree && (
-          <small className="text-danger form-text">{fieldErrors.agree}</small>
-        )}
-
         <button type="submit">提交</button>
       </form>
     </>
