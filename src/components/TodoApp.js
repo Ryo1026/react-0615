@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import TodoAddForm from './TodoAddForm'
+import TodoList from './TodoList'
 
 function TodoApp() {
   const [todoInput, setTodoInput] = useState('')
@@ -33,56 +35,38 @@ function TodoApp() {
       setTodos(newTodos)
     }
   }
+
+  const handleAddNew = (e) => {
+    console.log(e)
+    if (e.key === 'Enter' && e.target.value !== '') {
+      // 建立todo項目的物件值
+      const newTodoItem = {
+        id: +new Date(), // 時間obj產生id
+        text: e.target.value,
+        cpmpleted: false,
+      }
+
+      // 文字輸入框的值加到陣列todos
+      // 相當於unshift，在陣列前加入新的成員
+      const newTodos = [newTodoItem, ...todos]
+      setTodos(newTodos)
+
+      setTodoInput('') // 清空文字輸入框
+    }
+  }
+
   return (
     <>
-      {/* 可控的表單元素，value對應到狀態，onChange對應到設定狀態 */}
-      <input
-        type="text"
-        value={todoInput}
-        onChange={(e) => setTodoInput(e.target.value)}
-        onKeyPress={(e) => {
-          console.log(e)
-          if (e.key === 'Enter' && e.target.value !== '') {
-            // 建立todo項目的物件值
-            const newTodoItem = {
-              id: +new Date(), // 時間obj產生id
-              text: e.target.value,
-              cpmpleted: false,
-            }
-
-            // 文字輸入框的值加到陣列todos
-            // 相當於unshift，在陣列前加入新的成員
-            const newTodos = [newTodoItem, ...todos]
-            setTodos(newTodos)
-
-            setTodoInput('') // 清空文字輸入框
-          }
-        }}
+      <TodoAddForm
+        todoInput={todoInput}
+        setTodoInput={setTodoInput}
+        handleAddNew={handleAddNew}
       />
-      <ul>
-        {todos.map((todoItem, i) => {
-          return (
-            <li key={todoItem.id}>
-              <input
-                type="checkbox"
-                checked={todoItem.completed}
-                onChange={() => {
-                  handleCompleted(todoItem.id)
-                }}
-              />
-              {/* 若事項已完成 則產生刪除線項目 */}
-              {todoItem.completed ? <del>{todoItem.text}</del> : todoItem.text}
-              <button
-                onClick={() => {
-                  handleDelete(todoItem.id)
-                }}
-              >
-                刪除
-              </button>
-            </li>
-          )
-        })}
-      </ul>
+      <TodoList
+        todos={todos}
+        handleCompleted={handleCompleted}
+        handleDelete={handleDelete}
+      />
     </>
   )
 }
