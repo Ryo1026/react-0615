@@ -1,3 +1,5 @@
+import React from 'react'
+
 function RadioBox(props) {
   const { gender, setGender, value } = props
 

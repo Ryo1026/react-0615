@@ -1,4 +1,5 @@
 import React from 'react'
+import TodoItem from './TodoItem'
 
 function TodoList(props) {
   const { todos, handleCompleted, handleDelete } = props
@@ -8,24 +9,12 @@ function TodoList(props) {
       <ul>
         {todos.map((todoItem, i) => {
           return (
-            <li key={todoItem.id}>
-              <input
-                type="checkbox"
-                checked={todoItem.completed}
-                onChange={() => {
-                  handleCompleted(todoItem.id)
-                }}
-              />
-              {/* 若事項已完成 則產生刪除線項目 */}
-              {todoItem.completed ? <del>{todoItem.text}</del> : todoItem.text}
-              <button
-                onClick={() => {
-                  handleDelete(todoItem.id)
-                }}
-              >
-                刪除
-              </button>
-            </li>
+            <TodoItem
+              key={todoItem.id}
+              todoItem={todoItem}
+              handleCompleted={handleCompleted}
+              handleDelete={handleDelete}
+            />
           )
         })}
       </ul>
