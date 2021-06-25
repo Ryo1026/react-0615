@@ -26,11 +26,11 @@ function App() {
           <Link to="/about">About</Link>
           <Link to="/login">Login</Link>
 
-          <hr />
+          {/* <hr />
           <h2>用a元件</h2>
           <a href="/">Home</a>
           <a href="/about">About</a>
-          <a href="/login">Login</a>
+          <a href="/login">Login</a> */}
 
           {/* 匹配路由表(路徑單一匹配) */}
           <Switch>
